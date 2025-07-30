@@ -170,4 +170,22 @@ export default class Boid {
         const direction = this.velocity.clone().normalize();
         this.mesh.quaternion.setFromUnitVectors(up, direction);
     }
+
+    avoidObstacles(obstacles: THREE.Vector3[]) {
+        const avoidanceForce = new THREE.Vector3();
+
+        for (const obs of obstacles) {
+            const distance = this.position.distanceTo(obs);
+            const safeDistance = 12; // how close before avoidance kicks in
+
+            if (distance < safeDistance) {
+                const away = this.position.clone().sub(obs).normalize().multiplyScalar(1 / distance);
+                avoidanceForce.add(away);
+            }
+        }
+
+        avoidanceForce.clampLength(0, 0.05); // control strength
+        this.velocity.add(avoidanceForce);
+    }
+
 }

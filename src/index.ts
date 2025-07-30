@@ -74,6 +74,15 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
+// Hoop obstacle
+const hoopGeometry = new THREE.TorusGeometry(5, 0.9, 26, 120);
+const hoopMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.4 });
+const hoop = new THREE.Mesh(hoopGeometry, hoopMaterial);
+hoop.rotation.x = Math.PI / 1.2;
+hoop.rotation.y = Math.PI / 1.2;
+hoop.rotation.z = Math.PI / 2;
+scene.add(hoop);
+
 // Boids
 const boids: Boid[] = [];
 for (let i = 0; i < NUM_BOIDS; i++) {
@@ -135,6 +144,7 @@ function animate() {
         boid.flock(boids);
         if (mouse3D) {
             const steer = boid.seek(mouse3D);
+            boid.avoidObstacles([hoop.position]);
             boid.applyForce(steer);
         }
         boid.update();
