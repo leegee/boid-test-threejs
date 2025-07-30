@@ -11,7 +11,7 @@ export default class Boid {
     private static readonly DESIRED_SEPARATION = 4;
 
     private static readonly geometry = new THREE.ConeGeometry(0.5, 1.5, 8);
-    private static readonly material = new THREE.MeshStandardMaterial({ color: 0x3399ff });
+    private static readonly material = new THREE.MeshStandardMaterial({ color: 0xaaddff });
 
     position: THREE.Vector3;
     velocity: THREE.Vector3;
