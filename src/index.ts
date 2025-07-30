@@ -97,6 +97,34 @@ window.addEventListener("keydown", (e: KeyboardEvent) => {
     }
 });
 
+let mouse3D: THREE.Vector3 | null = null;
+const mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
+
+window.addEventListener("mousemove", (e: MouseEvent) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    // Get point in the box's plane along the ray
+    const point = raycaster.ray.origin.clone().add(
+        raycaster.ray.direction.clone().multiplyScalar(50) // arbitrary depth
+    );
+
+    // Check if point is inside bounding box
+    if (
+        point.x >= min.x && point.x <= max.x &&
+        point.y >= min.y && point.y <= max.y &&
+        point.z >= min.z && point.z <= max.z
+    ) {
+        mouse3D = point;
+    } else {
+        mouse3D = null;
+    }
+});
+
 animate();
 
 function animate() {
@@ -105,6 +133,10 @@ function animate() {
 
     for (const boid of boids) {
         boid.flock(boids);
+        if (mouse3D) {
+            const steer = boid.seek(mouse3D);
+            boid.applyForce(steer);
+        }
         boid.update();
     }
 

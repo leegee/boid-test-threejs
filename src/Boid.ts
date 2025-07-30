@@ -102,9 +102,17 @@ export default class Boid {
         return this.seek(sum);
     }
 
-    seek(target: THREE.Vector3): THREE.Vector3 {
+    seekNatural(target: THREE.Vector3): THREE.Vector3 {
         const desired = new THREE.Vector3().subVectors(target, this.position).setLength(Boid.MAX_SPEED);
         const steer = new THREE.Vector3().subVectors(desired, this.velocity);
+        steer.clampLength(0, Boid.MAX_FORCE);
+        return steer;
+    }
+
+    seek(target: THREE.Vector3): THREE.Vector3 {
+        const desired = target.clone().sub(this.position);
+        desired.setLength(Boid.MAX_SPEED);
+        const steer = desired.sub(this.velocity);
         steer.clampLength(0, Boid.MAX_FORCE);
         return steer;
     }
