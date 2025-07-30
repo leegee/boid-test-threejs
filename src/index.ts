@@ -75,8 +75,17 @@ const ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
 // Hoop obstacle
-const hoopGeometry = new THREE.TorusGeometry(5, 0.9, 26, 120);
-const hoopMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.4 });
+const hoopGeometry = new THREE.TorusGeometry(15, 6, 26, 120);
+const hoopMaterial = new THREE.MeshStandardMaterial({
+    metalness: 1.0,
+    roughness: 0.2,
+    color: 0x557700,
+});
+
+const pointLight = new THREE.PointLight(0xffffff, 0.8);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
+
 const hoop = new THREE.Mesh(hoopGeometry, hoopMaterial);
 hoop.rotation.x = Math.PI / 1.2;
 hoop.rotation.y = Math.PI / 1.2;
