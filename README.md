@@ -1,6 +1,6 @@
 # boids
 
-(https://leegee.github.io/boid-test-threejs/)[https://leegee.github.io/boid-test-threejs/]
+[https://leegee.github.io/boid-test-threejs](https://leegee.github.io/boid-test-threejs)
 
 To install dependencies:
 
