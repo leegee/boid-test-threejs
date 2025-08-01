@@ -1,5 +1,6 @@
 {
   "name": "boids",
+  "description": "Flocks, Herds, and Schools: A Distributed Behavioral Model - Craig Reynolds",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Boid from './Boid';
 
-export const NUM_BOIDS = 150;
+export const NUM_BOIDS = 350;
 const BOX_HEIGHT = 50;
 
 let animating = true;

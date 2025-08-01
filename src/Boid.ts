@@ -33,6 +33,7 @@ export default class Boid {
 
         this.acceleration = new THREE.Vector3();
         this.mesh = new THREE.Mesh(Boid.geometry, Boid.material);
+        this.mesh.scale.set(0.5, 0.5, 0.5);
     }
 
     applyForce(force: THREE.Vector3): void {
@@ -118,7 +119,7 @@ export default class Boid {
     }
 
     flock(boids: Boid[]): void {
-        const separation = this.separation(boids).multiplyScalar(1.5);
+        const separation = this.separation(boids).multiplyScalar(1.7);
         const alignment = this.alignment(boids).multiplyScalar(1.0);
         const cohesion = this.cohesion(boids).multiplyScalar(1.0);
 
