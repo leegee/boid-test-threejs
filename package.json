@@ -1,11 +1,13 @@
 {
   "name": "boids",
   "description": "Flocks, Herds, and Schools: A Distributed Behavioral Model - Craig Reynolds",
+  "homepage": "https://leegee.github.io/boid-test-threejs",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
+    "build": "vite build",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "deploy": "vite build && gh-pages -d dist",
     "preview": "vite preview"
   },
   "devDependencies": {
