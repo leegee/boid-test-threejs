@@ -102,6 +102,12 @@ hoop.rotation.y = Math.PI / 1.2;
 hoop.rotation.z = Math.PI / 2;
 scene.add(hoop);
 
+const targetGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+const targetMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const targetMarker = new THREE.Mesh(targetGeometry, targetMaterial);
+targetMarker.visible = false;
+scene.add(targetMarker);
+
 // Boids
 const boids: Boid[] = [];
 for (let i = 0; i < NUM_BOIDS; i++) {
@@ -150,6 +156,13 @@ window.addEventListener("mousemove", (e: MouseEvent) => {
         mouse3D = point;
     } else {
         mouse3D = null;
+    }
+
+    if (mouse3D) {
+        targetMarker.position.copy(mouse3D);
+        targetMarker.visible = true;
+    } else {
+        targetMarker.visible = false;
     }
 });
 
